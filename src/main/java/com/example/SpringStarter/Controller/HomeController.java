@@ -12,7 +12,12 @@ public class HomeController {
     }
     
     @GetMapping("/about")
-    public String about(Model Model){
+    public String about(Model Model) {
         return "about";
+    }
+    
+    @GetMapping("/book")
+    public String book(Model Model){
+        return "book";
     }
 }
