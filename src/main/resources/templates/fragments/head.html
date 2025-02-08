@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head lang="en" xmlns:th="http://www.thymeleaf.org">
-    <!-- namespace xmlns:th="http://www.thymeleaf.org" this portion will let spring know that its a thymeleaf template-->
     <!-- Basic -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,12 +13,12 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/favicon.png" type="" />
+    <link rel="shortcut icon" th:href="@{images/favicon.png}" type="" />
 
-    <title>Spring Boot</title>
+    <title>StudyEasy Demo</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}" />
 
     <!--owl slider stylesheet -->
     <link
@@ -35,11 +34,11 @@
       crossorigin="anonymous"
     />
     <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link th:href="@{css/font-awesome.min.css}" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link th:href="@{css/style.css}" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet" />
+    <link th:href="@{css/responsive.css}" rel="stylesheet" />
   </head>
 </html>
