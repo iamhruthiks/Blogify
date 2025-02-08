@@ -32,7 +32,7 @@ public class SeedData implements CommandLineRunner {
 
         account02.setEmail("account02@example.com");
         account02.setPassword("password");
-        account02.setFirstname("user01");
+        account02.setFirstname("user02");
         
         accountService.save(account01);
         accountService.save(account02);
