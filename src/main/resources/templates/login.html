@@ -17,28 +17,24 @@
     <div class="container">
       <div class="heading_container">
         <h4>
-         Register
+        Login
         </h4>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
             <form action="#"
-                th:action="@{/register}"
-                th:object="${account}"
+                th:action="@{/login}"
                 method="post">
               <div>
-                <input id="email" type="email" th:field="*{email}" class="form-control" placeholder="Email" />
+                <input id="email" type="email" class="form-control" placeholder="Email" />
               </div>
               <div>
-                <input id="password" type="password" th:field="*{password}" class="form-control" placeholder="Password" />
-              </div>
-              <div>
-                <input id="firstname" type="text" th:field="*{firstname}" class="form-control" placeholder="First name" />
+                <input id="password" type="password"  class="form-control" placeholder="Password" />
               </div>
               <div class="btn_box">
                 <button type="submit">
-                  Register
+                 Login
                 </button>
               </div>
             </form>
