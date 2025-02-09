@@ -29,6 +29,8 @@ public class Post {
    private String body;
 
    private LocalDateTime createdAt;
+
+   private LocalDateTime updatedAt;
    
    @ManyToOne
    @JoinColumn(name = "account_id", referencedColumnName = "id", nullable = true )
