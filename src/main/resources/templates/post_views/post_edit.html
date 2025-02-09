@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
- <head lang="en" xmlns:th="http://www.thymeleaf.org">
+   <head lang="en" xmlns:th="http://www.thymeleaf.org">
     <!-- namespace xmlns:th="http://www.thymeleaf.org" this portion will let spring know that its a thymeleaf template-->
     <!-- Basic -->
     <meta charset="utf-8" />
@@ -50,23 +50,37 @@
     <div class="bg-box">
       <img src="/images/nav-bg.jpg" alt="">
     </div>
-    <header th:replace="fragments/header :: header">
+    <header th:replace="/fragments/header :: header">
   </div>
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container  ">
-      <h3><a th:text="${post.title}">Title</a></h3>
-        <h5 th:text="'Author: ' + ${post.account.firstname} + ' | Created at: ' + ${post.createdAt}"></h5>
-        <p th:utext="${post.body}">body</p>
-        <hr color="grey">
-         <div sec:authorize="isAuthenticated()" th:if="${isOwner}">
-          <a th:href="@{'/posts/' + ${post.id} + '/edit'}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Edit</a>
+ <section class="food_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <h3>Add post</h3>
+            <form action="#"
+                th:action="@{'/posts/{id}/edit' (id=${post.id})}"
+                th:object="${post}"
+                method="post">
+              <div class="form-group">
+                <input type="hidden" id="account" name="account" th:field="*{account}">
+                <input id="title" th:field="*{title}" name="title" type="text" class="form-control" placeholder="title" />
+              </div>
+              <div class="form-group">
+                <textarea id="editor" th:field="*{body}" name="body" type="textarea" />
+              </div>
+                 <button type="submit"  class="btn btn-primary">
+                  Update post
+                </button>
+            </form>
+          </div>
         </div>
     </div>
   </section>
-  <footer class="footer_section">
+   <footer class="footer_section">
       <div class="container">
         <div class="row">
           <div class="col-md-4 footer-col">
@@ -120,7 +134,14 @@
       <!-- Google Map -->
       <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script> -->
       <!-- End Google Map -->
+       <!-- Text editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor
+          .create( document.querySelector( '#editor' ) )
+    </script>
     </footer>
+ 
 </body>
 
 </html>

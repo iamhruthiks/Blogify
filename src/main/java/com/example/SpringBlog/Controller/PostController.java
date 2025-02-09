@@ -16,6 +16,8 @@ import com.example.SpringBlog.models.Account;
 import com.example.SpringBlog.models.Post;
 import com.example.SpringBlog.services.AccountService;
 import com.example.SpringBlog.services.PostService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -83,7 +85,19 @@ public class PostController {
             return "redirect:/?error";
         }
         postService.save(post);
-        return "redirect:/posts/"+post.getId();
+        return "redirect:/posts/" + post.getId();
     }
     
+    @GetMapping("posts/{id}/edit")
+    @PreAuthorize("isAuthenticated()")
+    public String getPostForEdit(@PathVariable Long id, Model model) {
+        Optional<Post> optionalPost = postService.getById(id);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            model.addAttribute("post", post);
+            return "post_views/post_edit";
+        } else {
+            return "404";
+        }
+    }
 }
