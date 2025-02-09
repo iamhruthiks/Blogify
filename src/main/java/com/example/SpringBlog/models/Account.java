@@ -45,6 +45,6 @@ public class Account {
                 joinColumns = {@JoinColumn(name="account_id",referencedColumnName = "id")},
                         inverseJoinColumns = {@JoinColumn(name="authority_id",referencedColumnName = "id")}
     )
-    private Set<Authority> authority = new HashSet<>();
+    private Set<Authority> authorities = new HashSet<>();
     
 }
