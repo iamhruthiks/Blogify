@@ -1,4 +1,4 @@
-package com.example.SpringStarter.services;
+package com.example.SpringBlog.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringStarter.models.Post;
-import com.example.SpringStarter.repositories.PostRepository;
+import com.example.SpringBlog.models.Post;
+import com.example.SpringBlog.repositories.PostRepository;
 
 @Service
 public class PostService {

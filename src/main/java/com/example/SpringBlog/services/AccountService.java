@@ -1,4 +1,4 @@
-package com.example.SpringStarter.services;
+package com.example.SpringBlog.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringStarter.models.Account;
-import com.example.SpringStarter.repositories.AccountRepository;
+import com.example.SpringBlog.models.Account;
+import com.example.SpringBlog.repositories.AccountRepository;
+import com.example.SpringBlog.util.constants.Roles;
 
 @Service
 public class AccountService implements UserDetailsService {
@@ -27,6 +28,7 @@ public class AccountService implements UserDetailsService {
     
     public Account save(Account account) {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account.setRole(Roles.USER.getRole());
         return accountRepository.save(account);
     }
 
@@ -41,7 +43,7 @@ public class AccountService implements UserDetailsService {
         Account account = optionalAccount.get();
 
         List<GrantedAuthority> grantedAuthority = new ArrayList<>();
-        grantedAuthority.add(new SimpleGrantedAuthority("ALLOW"));
+        grantedAuthority.add(new SimpleGrantedAuthority(account.getRole()));
 
         return new User(account.getEmail(),account.getPassword(),grantedAuthority);
     }

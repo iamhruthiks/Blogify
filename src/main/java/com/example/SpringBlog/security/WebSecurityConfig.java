@@ -1,4 +1,4 @@
-package com.example.SpringStarter.config;
+package com.example.SpringBlog.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

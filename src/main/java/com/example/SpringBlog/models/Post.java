@@ -1,4 +1,4 @@
-package com.example.SpringStarter.models;
+package com.example.SpringBlog.models;
 
 import java.time.LocalDateTime;
 

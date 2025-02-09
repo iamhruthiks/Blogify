@@ -1,13 +1,13 @@
-package com.example.SpringStarter;
+package com.example.SpringBlog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringStarterApplication {
+public class SpringBlogApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringStarterApplication.class, args);
+		SpringApplication.run(SpringBlogApplication.class, args);
 	}
 
 }

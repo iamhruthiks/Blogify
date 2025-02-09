@@ -1,4 +1,4 @@
-package com.example.SpringStarter.config;
+package com.example.SpringBlog.config;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.example.SpringStarter.models.Account;
-import com.example.SpringStarter.models.Post;
-import com.example.SpringStarter.services.AccountService;
-import com.example.SpringStarter.services.PostService;
+import com.example.SpringBlog.models.Account;
+import com.example.SpringBlog.models.Post;
+import com.example.SpringBlog.services.AccountService;
+import com.example.SpringBlog.services.PostService;
 
 @Component
 public class SeedData implements CommandLineRunner {
@@ -29,11 +29,13 @@ public class SeedData implements CommandLineRunner {
         account01.setEmail("account01@example.com");
         account01.setPassword("password");
         account01.setFirstname("user01");
+        account01.setLastname("lastname");
 
         account02.setEmail("account02@example.com");
         account02.setPassword("password");
         account02.setFirstname("user02");
-        
+        account02.setLastname("lastname");
+
         accountService.save(account01);
         accountService.save(account02);
 

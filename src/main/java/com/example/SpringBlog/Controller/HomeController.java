@@ -1,4 +1,4 @@
-package com.example.SpringStarter.Controller;
+package com.example.SpringBlog.Controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.SpringStarter.models.Post;
-import com.example.SpringStarter.services.PostService;
+import com.example.SpringBlog.models.Post;
+import com.example.SpringBlog.services.PostService;
 
 @Controller
 public class HomeController {

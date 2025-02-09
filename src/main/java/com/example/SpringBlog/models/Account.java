@@ -1,4 +1,4 @@
-package com.example.SpringStarter.models;
+package com.example.SpringBlog.models;
 
 import java.util.List;
 
@@ -26,6 +26,10 @@ public class Account {
     private String password;
 
     private String firstname;
+     
+    private String lastname;
+
+    private String role;
 
     @OneToMany(mappedBy = "account")
     private List<Post> posts;

@@ -1,15 +1,14 @@
-package com.example.SpringStarter.Controller;
+package com.example.SpringBlog.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import com.example.SpringStarter.models.Account;
-import com.example.SpringStarter.services.AccountService;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.SpringBlog.models.Account;
+import com.example.SpringBlog.services.AccountService;
 
 
 
@@ -31,7 +30,7 @@ public class AccountController {
         accountService.save(account);
         return "redirect:/";
     }
-    
+
     @GetMapping("/login")
     public String login(Model model) {
         return "login";
