@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.SpringBlog.util.constants.Privillages;
-import com.example.SpringBlog.util.constants.Roles;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -26,8 +25,9 @@ public class WebSecurityConfig {
             "/db-console/**",
             "/css/**",
             "/fonts/**",
-            "images/**",
-            "/js/**"
+            "/images/**",
+            "/js/**",
+            "/posts/**"
     };
 
     @Bean
@@ -44,7 +44,8 @@ public class WebSecurityConfig {
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/editor/**").hasAnyRole("ADMIN","EDITOR")
                     .requestMatchers("/test/**").hasAuthority(Privillages.ACCESS_ADMIN_PANEL.getPrivillage())
-                    //.anyRequest().authenticated() // All other requests also require authentication
+                //.anyRequest().authenticated() // All other requests also require authentication
+                    .anyRequest().permitAll()
             )
             .formLogin(form -> form
                     .loginPage("/login") // Specify your custom login page
