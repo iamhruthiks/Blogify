@@ -9,16 +9,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.SpringBlog.models.Account;
 import com.example.SpringBlog.models.Post;
+import com.example.SpringBlog.services.AccountService;
 import com.example.SpringBlog.services.PostService;
+
 
 @Controller
 public class PostController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private AccountService accountService;
+
     @GetMapping("/post/{id}")
-    public String getPost(@PathVariable Long id,Model model, Principal principal) {
+    public String getPost(@PathVariable Long id, Model model, Principal principal) {
         Optional<Post> optionalPost = postService.getById(id);
         String authUser = "email";
         if (optionalPost.isPresent()) {
@@ -36,10 +43,29 @@ public class PostController {
             } else {
                 model.addAttribute("isOwner", false);
             }
-            
+
             return "post_views/post";
-            } else {
-                return "404";
-            }
+        } else {
+            return "404";
+        }
     }
+    
+    @GetMapping("posts/add")
+    public String addPost(Model model,Principal principal) {
+        String authUser = "email";
+        if (principal != null) {
+            authUser = principal.getName();
+        }
+
+        Optional<Account> optionalAccount = accountService.findOneByEmail(authUser);
+        if (optionalAccount.isPresent()) {
+            Post post = new Post();
+            post.setAccount(optionalAccount.get());
+            model.addAttribute("post", post);
+            return "post_views/post_add";
+        } else {
+            return "redirect:/";
+        }
+    }
+    
 }

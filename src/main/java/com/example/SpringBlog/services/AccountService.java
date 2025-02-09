@@ -49,10 +49,15 @@ public class AccountService implements UserDetailsService {
         grantedAuthority.add(new SimpleGrantedAuthority(account.getRole()));
 
         for (Authority _auth : account.getAuthorities()) {
-              grantedAuthority.add(new SimpleGrantedAuthority(_auth.getName()));
+            grantedAuthority.add(new SimpleGrantedAuthority(_auth.getName()));
         }
-        
-        return new User(account.getEmail(),account.getPassword(),grantedAuthority);
+
+        return new User(account.getEmail(), account.getPassword(), grantedAuthority);
+    }
+    
+
+    public Optional<Account> findOneByEmail(String email) {
+        return accountRepository.findOneByEmailIgnoreCase(email);
     }
 
 
