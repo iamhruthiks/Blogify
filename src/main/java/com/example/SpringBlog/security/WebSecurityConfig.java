@@ -27,7 +27,6 @@ public class WebSecurityConfig {
             "/fonts/**",
             "/images/**",
             "/js/**",
-            "/posts/**"
     };
 
     @Bean
@@ -43,7 +42,7 @@ public class WebSecurityConfig {
                     .requestMatchers("/profile/**").authenticated() // Require authentication for "/profile/**"
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/editor/**").hasAnyRole("ADMIN","EDITOR")
-                    .requestMatchers("/test/**").hasAuthority(Privillages.ACCESS_ADMIN_PANEL.getPrivillage())
+                // .requestMatchers("/test/**").hasAuthority(Privillages.ACCESS_ADMIN_PANEL.getPrivillage())
                 //.anyRequest().authenticated() // All other requests also require authentication
                     .anyRequest().permitAll()
             )

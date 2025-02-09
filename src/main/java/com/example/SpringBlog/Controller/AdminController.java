@@ -10,7 +10,7 @@ public class AdminController {
     
     @GetMapping("/admin")
     public String admin(Model model) {
-        return "admin";
+        return "admin_views/admin";
     }
     
 }
