@@ -7,9 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.example.SpringBlog.models.Account;
+import com.example.SpringBlog.models.Authority;
 import com.example.SpringBlog.models.Post;
 import com.example.SpringBlog.services.AccountService;
+import com.example.SpringBlog.services.AuthorityService;
 import com.example.SpringBlog.services.PostService;
+import com.example.SpringBlog.util.constants.Privillages;
 
 @Component
 public class SeedData implements CommandLineRunner {
@@ -20,8 +23,18 @@ public class SeedData implements CommandLineRunner {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private AuthorityService authorityService;
+
     @Override
     public void run(String... args) throws Exception {
+
+        for (Privillages auth : Privillages.values()) {
+            Authority authority = new Authority();
+            authority.setId(auth.getId());
+            authority.setName(auth.getPrivillage());
+            authorityService.save(authority);
+        }
 
         Account account01 = new Account();
         Account account02 = new Account();
