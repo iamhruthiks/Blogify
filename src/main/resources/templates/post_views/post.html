@@ -57,8 +57,13 @@
 
   <section class="about_section layout_padding">
     <div class="container  ">
-      Post data ...
-     
+      <h3><a th:text="${post.title}">Title</a></h3>
+        <h5 th:text="'Author: ' + ${post.account.firstname} + ' | Created at: ' + ${post.createdAt}"></h5>
+        <p th:text="${post.body}">body</p>
+        <hr color="grey">
+         <div sec:authorize="isAuthenticated()" th:if="${isOwner}">
+          <a th:href="@{'/edit_post/' + ${post.id}}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Edit</a>
+        </div>
     </div>
   </section>
   <footer class="footer_section">
