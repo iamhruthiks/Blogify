@@ -50,7 +50,7 @@ public class WebSecurityConfig {
             )
             .logout(form -> form
                 .logoutUrl("/logout") // Specify your custom logout page
-                .logoutSuccessUrl("/logout?success")
+                .logoutSuccessUrl("/")
                 
             )
             .httpBasic(withDefaults());

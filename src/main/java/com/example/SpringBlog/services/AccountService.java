@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.SpringBlog.models.Account;
+import com.example.SpringBlog.models.Authority;
 import com.example.SpringBlog.repositories.AccountRepository;
 import com.example.SpringBlog.util.constants.Roles;
 
@@ -28,7 +29,9 @@ public class AccountService implements UserDetailsService {
     
     public Account save(Account account) {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        account.setRole(Roles.USER.getRole());
+        if (account.getRole() == null){
+            account.setRole(Roles.USER.getRole());
+        }
         return accountRepository.save(account);
     }
 
@@ -45,6 +48,10 @@ public class AccountService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthority = new ArrayList<>();
         grantedAuthority.add(new SimpleGrantedAuthority(account.getRole()));
 
+        for (Authority _auth : account.getAuthorities()) {
+              grantedAuthority.add(new SimpleGrantedAuthority(_auth.getName()));
+        }
+        
         return new User(account.getEmail(),account.getPassword(),grantedAuthority);
     }
 
