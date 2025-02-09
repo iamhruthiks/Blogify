@@ -21,4 +21,9 @@ public class HomeController {
         model.addAttribute("posts", posts);
         return "home";
     }
+
+     @GetMapping("/editor")
+    public String editor(Model model) {
+        return "editor";
+    }
 }

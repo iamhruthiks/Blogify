@@ -8,6 +8,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.example.SpringBlog.util.constants.Privillages;
+import com.example.SpringBlog.util.constants.Roles;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -36,7 +40,11 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(WHITELIST).permitAll() // Allow public access to these endpoints
-                    .anyRequest().authenticated() // All other requests require authentication
+                    .requestMatchers("/profile/**").authenticated() // Require authentication for "/profile/**"
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/editor/**").hasAnyRole("ADMIN","EDITOR")
+                    .requestMatchers("/test/**").hasAuthority(Privillages.ACCESS_ADMIN_PANEL.getPrivillage())
+                    //.anyRequest().authenticated() // All other requests also require authentication
             )
             .formLogin(form -> form
                     .loginPage("/login") // Specify your custom login page
