@@ -53,8 +53,7 @@
     <header th:replace="/fragments/header :: header">
   </div>
 
- <!-- book section -->
- <section class="book_section layout_padding">
+ <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container">
       </div>
@@ -66,18 +65,16 @@
                 th:action="@{/post/add}"
                 th:object="${post}"
                 method="post">
-              <div>
+              <div class="form-group">
                 <input type="hidden" id="account" name="account" th:field="*{account}">
                 <input id="title" th:field="*{title}" name="title" type="email" class="form-control" placeholder="title" />
               </div>
-              <div>
-                <input id="body" th:field="*{body}" name="body" type="textarea"  class="form-control" placeholder="body" />
+              <div class="form-group">
+                <input id="editor" th:field="*{body}" name="body" type="textarea"  class="form-control" placeholder="body" />
               </div>
-              <div class="btn_box">
-                <button type="submit">
-                 Add post
+                 <button type="submit"  class="btn btn-primary">
+                  Add post
                 </button>
-              </div>
             </form>
           </div>
         </div>
@@ -137,6 +134,12 @@
       <!-- Google Map -->
       <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script> -->
       <!-- End Google Map -->
+       <!-- Text editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor
+          .create( document.querySelector( '#editor' ) )
+    </script>
     </footer>
  
 </body>
