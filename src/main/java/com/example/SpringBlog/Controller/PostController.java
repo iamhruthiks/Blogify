@@ -111,6 +111,19 @@ public class PostController {
             existingPost.setBody(post.getBody());
             postService.save(existingPost);
         }
-        return "redirect:/posts/"+post.getId();
+        return "redirect:/posts/" + post.getId();
+    }
+
+    @GetMapping("posts/{id}/delete")
+    @PreAuthorize("isAuthenticated()")
+    public String deletePost(@PathVariable Long id) {
+        Optional<Post> optionalPost = postService.getById(id);
+        if (optionalPost.isPresent()) {
+            Post Post = optionalPost.get();
+            postService.delete(Post);
+            return "redirect:/";
+        } else {
+            return "redirect:/?error";
+        }
     }
 }
