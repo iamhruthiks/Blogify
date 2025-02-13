@@ -37,3 +37,6 @@ build/
 
 ### upolaods ###
 src/main/resources/static/uploads/*
+
+### secret ###
+src/main/resources/secret.properties
