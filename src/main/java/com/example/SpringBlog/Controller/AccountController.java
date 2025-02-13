@@ -34,6 +34,8 @@ import com.example.SpringBlog.util.email.EmailDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -212,23 +214,37 @@ public class AccountController {
     }
     
     @GetMapping("/change-password")
-    public String change_password(Model model,@RequestParam("token") String token, RedirectAttributes attributes) {
+    public String change_password(Model model, @RequestParam("token") String token, RedirectAttributes attributes) {
+        if (token.equals("")) {
+            attributes.addFlashAttribute("error", "Invaild token");
+            return "redirect:/forgot-password";
+        }
         Optional<Account> optional_account = accountService.findByToken(token);
         if (optional_account.isPresent()) {
-            long account_id = optional_account.get().getId();
+            Account account = accountService.findById(optional_account.get().getId()).get();
             LocalDateTime now = LocalDateTime.now();
             if (now.isAfter(optional_account.get().getPassword_reset_token_expiry())) {
                 attributes.addFlashAttribute("error", "Token expried");
                 return "redirect:/forgot-password";
             }
-            model.addAttribute("account_id", account_id);
+            model.addAttribute("account", account);
             return "account_views/change_password";
         } else {
             attributes.addFlashAttribute("error", "Invalid token");
             return "redirect:/forgot-password";
         }
-        
+
     }
     
+   
+    @PostMapping("/change-password")
+    public String post_change_password(@ModelAttribute Account account, RedirectAttributes attributes) {
+        Account account_by_id = accountService.findById(account.getId()).get();
+        account_by_id.setPassword(account.getPassword());
+        account_by_id.setToken("");
+        accountService.save(account_by_id);
+        attributes.addFlashAttribute("message", "Password updated");
+        return "redirect:/login";
+    }
     
 }
