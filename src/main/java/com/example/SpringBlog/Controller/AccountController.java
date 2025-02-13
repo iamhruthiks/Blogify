@@ -122,18 +122,19 @@ public class AccountController {
     
     @PostMapping("/update_photo")
     @PreAuthorize("isAuthenticated()")
-    public String update_photo(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Principal principal) {
+    public String update_photo(@RequestParam("file") MultipartFile file, RedirectAttributes attributes,
+            Principal principal) {
         if (file.isEmpty()) {
             attributes.addFlashAttribute("error", "No file uploaded");
             return "redirect:/profile";
         } else {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            
+
             try {
                 int length = 10;
                 boolean useLetters = true;
                 boolean useNumbers = true;
-                String generatedString = RandomStringUtils.random(length,useLetters,useNumbers);
+                String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
                 String final_photo_name = generatedString + fileName;
                 String absolute_fileLocation = AppUtil.get_upload_path(final_photo_name);
 
@@ -160,10 +161,16 @@ public class AccountController {
                 }
                 return "redirect:/profile";
 
-            }catch (Exception e) {
+            } catch (Exception e) {
             }
         }
         return "redirect:/profile?error";
     }
+    
+    @GetMapping("/forgot-password")
+    public String forgot_password(Model model) {
+        return "account_views/forgot_password";
+    }
+
     
 }
