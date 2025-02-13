@@ -11,4 +11,6 @@ import com.example.SpringBlog.models.Account;
 public interface AccountRepository extends JpaRepository<Account,Long> {
     
      Optional<Account> findOneByEmailIgnoreCase(String email);
+     
+     Optional<Account> findByToken(String token);
 }
