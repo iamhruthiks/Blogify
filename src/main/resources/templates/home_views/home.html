@@ -50,7 +50,7 @@
         </ul>
     </nav>
   </form>
-  
+
   <section class="about_section layout_padding">
     <div class="container">
       <div class="posts" th:each = "post: ${posts}">
@@ -62,6 +62,16 @@
         <hr color="grey">
       </div>
     </div>
+
+    <nav th:if="${links ne null}" aria-label="...">
+      <ul class="pagination justify-content-center">
+        <th:block th:each="link: ${links}">
+          <li class="page-item">
+            <th:block th:utext="${link}">link</th:block>
+          </li>
+        </th:block>
+      </ul>
+    </nav>
   </section>
   <footer th:replace="/fragments/footer :: footer">
 </body>
